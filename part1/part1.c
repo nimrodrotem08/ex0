@@ -20,7 +20,7 @@ int main() {
     if (scanf("%i", &number_of_inputs) == 1 && number_of_inputs > 0) {
     } 
     else if (number_of_inputs <= 0) { 
-        printf("Invaild size");
+        printf("Invalid size\n");
         return 0;
     } else {
         return 0;
@@ -35,7 +35,7 @@ int main() {
         if (scanf(" %i", &numbers[i]) == 1) {
         
         } else { 
-            printf("Invaild number");
+            printf("Invalid number\n");
             free(numbers); 
             return 0; 
         }
@@ -50,7 +50,7 @@ int main() {
             exponent_sum += (int)log_val; 
         }
     }
-    printf("Total exponent sum is %i \n", exponent_sum);
+    printf("Total exponent sum is %i\n", exponent_sum);
 
     free(numbers); 
 
