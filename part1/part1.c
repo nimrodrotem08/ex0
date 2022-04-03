@@ -2,15 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int log2_check(int n) {
+#define NEG -1 
+
+// Calculate bit-wise power2 of a givven number (From https://graphics.stanford.edu/~seander/bithacks.html#IntegerLog) 
+int log2_check(unsigned int n) { 
     int counter = 0; 
-    for (int i = 1; i <= n; i = i *2) {
-        if (i == n) { 
+    if(n && !(n & (n - 1))) { 
+        while (n >>= 1) {
+            counter++; 
+        }
+        if (counter <= 30) {  // more then 30 will exceed int size!
             return counter; 
         }
-        counter++;
     }
-    return -1; 
+    return NEG; 
+
 }
 
 int main() {
@@ -26,8 +32,9 @@ int main() {
         return 0;
     }
 
-    int* numbers = malloc(sizeof(int) * number_of_inputs);
+    int* numbers = malloc(sizeof(long int) * number_of_inputs);
     if (!numbers) { 
+        free(numbers);
         return 0; 
     }
     printf("Enter numbers:\n");
@@ -45,7 +52,7 @@ int main() {
     int exponent_sum = 0;
     for (int i = 0; i < number_of_inputs ; i++) {
         log_val = log2_check(numbers[i]);
-        if (log_val != -1) { 
+        if (log_val != NEG) { 
             printf("The number %i is a power of 2: %i = 2^%i\n", numbers[i], numbers[i], (int)log_val);
             exponent_sum += (int)log_val; 
         }
